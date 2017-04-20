@@ -1,0 +1,9 @@
+<div>
+  <%= form_for @group do %>
+      <%= label_tag 'Group name' %>
+      <%= text_field :group, :name %>
+      <%= submit_tag 'Create new' %>
+  <% end %>
+</div>
+
+<%= render partial: 'list_all_groups' %>

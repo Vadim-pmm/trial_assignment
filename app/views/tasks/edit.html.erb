@@ -1,0 +1,18 @@
+<div>
+  <%= form_for @task do %>
+      <%= label_tag 'Task name' %>
+      <%= text_field :task, :name, disabled: true %>
+
+      <%= label_tag 'Description' %>
+      <%= text_area :task, :description, size: '10x10', disabled: true %>
+
+      <%= label_tag 'Deadline' %>
+      <%= date_field :task, :deadline %>
+
+      <%= label_tag 'Group name' %>
+      <%= select_tag :group_id, options_for_select(@list_of_groups, @group_id)  %>
+
+      <%= submit_tag 'Assign task' %>
+  <% end %>
+</div>
+

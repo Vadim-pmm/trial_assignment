@@ -1,0 +1,9 @@
+<div>
+    <% @users.each do |item| %>
+      <%= item.email %>
+         <span>       </span>
+         <%= link_to "#{item.group.name}", edit_user_path(item.id) %>
+         <span>'      '</span>
+         <%= link_to 'Delete', '#' %> <br />
+  <% end %>
+</div>

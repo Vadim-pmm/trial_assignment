@@ -1,0 +1,33 @@
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href='<%= root_url %>'>Xavier</a>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <ul class="nav navbar-nav col-md-6">
+        <li><%= link_to "Задачи", tasks_path  %></li>
+        <% if user_signed_in? && current_user.admin %>
+            <li><%= link_to "Список групп", new_group_path  %></li>
+            <li><%= link_to "Сотрудники", users_path  %></li>
+        <% end %>
+      </ul>
+
+      <ul class="nav navbar-right col-md-4">
+        <% if user_signed_in? %>
+            <li class='col-md-8 user-name text-right'>
+              <%= link_to current_user.email, '#"' %>
+            </li>
+            <li class="col-md-4" logout><%= link_to('Logout', destroy_user_session_path,
+                                                    class: 'btn btn-xs btn-danger', method: :delete) %>
+            </li>
+        <% else %>
+            <li class='col-md-8'></li>
+            <li class="col-md-4"><%= link_to('Sign-in', user_session_path, class: 'btn btn-xs btn-primary') %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
