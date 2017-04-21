@@ -28,7 +28,7 @@
 
               <td width="20%">
                 <% if current_user.admin  %>
-                    <% if item.reported_at %>
+                    <% if item.reported_at && !item.accepted %>
                         <%= link_to 'Accept', accept_path(item.id)  %>
                         <%= link_to 'Decline', decline_path(item.id)  %>
                     <% end %>
@@ -42,7 +42,7 @@
               </td>
 
               <td width="10%">
-                <%= item.deadline.strftime("%d/%m/%Y") %>
+                <%= item.deadline.strftime("%d/%m/%Y") if item.deadline %>
               </td>
             </tr>
         <% end %>

@@ -8,7 +8,17 @@
     <a class="navbar-brand" href='<%= root_url %>'>Xavier</a>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav col-md-6">
-        <li><%= link_to "Задачи", tasks_path  %></li>
+
+        <li class="dropdown" id="accountmenu">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tasks<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+             <li><%= link_to 'Current tasks', tasks_path %></a></li>
+             <% if user_signed_in? && current_user.admin %>
+                <li><%= link_to 'Archive', archive_path %></li>
+             <% end %>
+          </ul>
+        </li>
+
         <% if user_signed_in? && current_user.admin %>
             <li><%= link_to "Список групп", new_group_path  %></li>
             <li><%= link_to "Сотрудники", users_path  %></li>
