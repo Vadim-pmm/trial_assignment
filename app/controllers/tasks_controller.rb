@@ -60,6 +60,25 @@ class TasksController < ApplicationController
     redirect_to new_task_path
   end
 
+  def accept_task
+    @task = Task.find(params[:id])
+    @task.update(accepted: true)
+    redirect_to tasks_path
+  end
+
+  def decline_task
+    @task = Task.find(params[:id])
+    @task.update(reported_at: nil)
+    redirect_to tasks_path
+  end
+
+  def mark_finished
+    @task = Task.find(params[:id])
+    @task.update(reported_at: DateTime.now)
+    redirect_to tasks_path
+  end
+
+
   private
 
   def params_permitted

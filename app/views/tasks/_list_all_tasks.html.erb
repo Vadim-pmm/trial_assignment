@@ -4,31 +4,45 @@
   <% else %>
         <table class="table-striped">
           <tr>
-            <th width="50%">Задача</th>
-            <th width="40%">В группе</th>
-            <th width="10%">Контрольная дата</th>
+            <th width="40%">Task</th>
+            <th width="30%">Belongs to</th>
+            <th width="20%">Action</th>
+            <th width="10%">Deadline</th>
            </tr>
 
         <% @tasks.each do |item|%>
             <tr>
-              <td width="50%">
+              <td width="40%">
                 <%= item.name %>
               </td>
 
-              <td width="40%">
-                  <% if current_user.id == 1  %>
+              <td width="30%">
+                  <% if current_user.admin  %>
                       <% if item.group_id == 1 %>
                           <%= link_to 'Назначить группе', edit_task_path(item.id) %>
                       <% else %>
                         <strong><%= item.group.name %></strong>
                       <% end %>
-                  <% else %>
-                    <%= link_to 'Отметить как выполненное', "#" %>
                   <% end %>
               </td>
 
+              <td width="20%">
+                <% if current_user.admin  %>
+                    <% if item.reported_at %>
+                        <%= link_to 'Accept', accept_path(item.id)  %>
+                        <%= link_to 'Decline', decline_path(item.id)  %>
+                    <% end %>
+                <% else %>
+                    <% if item.reported_at %>
+                        <strong><i><%= item.reported_at.strftime("%d/%m/%Y %H:%M") %></i></strong>
+                    <% else %>
+                        <%= link_to 'Mark as finished', finished_path(item.id) %>
+                    <% end %>
+                <% end %>
+              </td>
+
               <td width="10%">
-                <%= item.deadline %>
+                <%= item.deadline.strftime("%d/%m/%Y") %>
               </td>
             </tr>
         <% end %>
