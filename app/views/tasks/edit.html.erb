@@ -1,18 +1,18 @@
-<div>
-  <%= form_for @task do %>
-      <%= label_tag 'Task name' %>
-      <%= text_field :task, :name, disabled: true %>
+<div class="row">
+  <%= form_for @task, :html => {:class => "form-group center"} do |f|%>
+      <%= f.label :name, 'Task name', class: 'label label-default lbl-my-style' %>
+      <%= f.text_field :name, disabled: true, class: 'form-control' %>
 
-      <%= label_tag 'Description' %>
-      <%= text_area :task, :description, size: '10x10', disabled: true %>
+      <%= f.label :description, 'Description', class: 'label label-default lbl-my-style' %>
+      <%= f.text_area :description, size: '10x10', disabled: true, class: 'form-control' %>
 
-      <%= label_tag 'Deadline' %>
-      <%= date_field :task, :deadline %>
+      <%= f.label :deadline, 'Deadline', class: 'label label-default lbl-my-style' %>
+      <%= f.date_field :deadline, class: 'form-control' %>
 
-      <%= label_tag 'Group name' %>
-      <%= select_tag :group_id, options_for_select(@list_of_groups, @group_id)  %>
+      <%= f.label :group_id, 'Group name', class: 'label label-default lbl-my-style' %>
+      <%= f.select(:group_id, @list_of_groups, {}, class: "form-control")  %>
 
-      <%= submit_tag 'Assign task' %>
+      <%= f.submit_tag 'Assign task', class: "btn btn-success" %>
   <% end %>
 </div>
 

@@ -1,9 +1,15 @@
-<div>
+<div class="row">
     <% @users.each do |item| %>
-      <%= item.email %>
-         <span>       </span>
+      <div class="col-md-2">
+          <%= item.email %>
+      </div>
+      <div class="col-md-6">
+        <%= item.name %>
+      </div>
+      <div class="col-md-4 shifted">
          <%= link_to "#{item.group.name}", edit_user_path(item.id) %>
-         <span>'      '</span>
-         <%= link_to 'Delete', '#' %> <br />
+      </div>
   <% end %>
 </div>
+
+

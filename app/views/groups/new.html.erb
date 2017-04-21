@@ -1,8 +1,8 @@
-<div>
-  <%= form_for @group do %>
-      <%= label_tag 'Group name' %>
-      <%= text_field :group, :name %>
-      <%= submit_tag 'Create new' %>
+<div class="row">
+  <%= form_for @group, :html => {:class => "form-group center"} do |f|%>
+      <%= f.label :name, 'Group name', class: 'label label-default lbl-my-style' %>
+      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.submit 'Create new', class: "btn btn-success" %>
   <% end %>
 </div>
 

@@ -1,23 +1,23 @@
 <div class="row">
-  <%= form_for @task, :html => {:class => "form-group center"} do %>
-      <%= label_tag :name, 'Task name', class: 'label label-default lbl-my-style' %>
-      <%= text_field :task, :name, class: 'form-control' %>
+  <%= form_for @task, :html => {:class => "form-group center"} do |f|%>
+      <%= f.label :name, 'Task name', class: 'label label-default lbl-my-style' %>
+      <%= f.text_field :name, class: 'form-control' %>
       <br />
-      <%= label_tag :description, 'Description', class: 'label label-default lbl-my-style' %>
-      <%= text_area :task, :description, size: '10x10', class: 'form-control' %>
+      <%= f.label :description, 'Description', class: 'label label-default lbl-my-style' %>
+      <%= f.text_area :description, size: '10x10', class: 'form-control' %>
       <br />
       <div class="row">
         <div class="col-md-6">
-          <%= label_tag :deadline, 'Deadline', class: 'label label-default lbl-my-style' %>
-          <%= date_field :task, :deadline, class: 'form-control' %>
+          <%= f.label :deadline, 'Deadline', class: 'label label-default lbl-my-style' %>
+          <%= f.date_field :deadline, class: 'form-control' %>
         </div>
         <div class="col-md-6">
-          <%= label_tag :group_id, 'Group name', class: 'label label-default lbl-my-style' %>
-          <%= select_tag :group_id, options_for_select(@list_of_groups, @group_id), class: 'form-control'  %>
+          <%= f.label :group_id, 'Group name', class: 'label label-default lbl-my-style' %>
+          <%= f.select(:group_id, @list_of_groups, {}, class: "form-control") %>
       </div>
       </div>
       <br />
-      <%= submit_tag 'Create new task', class: "btn btn-success" %>
+      <%= f.submit 'Create new task', class: "btn btn-success" %>
   <% end %>
 </div>
 

@@ -1,11 +1,18 @@
-<div>
-  <%= form_for @user do %>
-      <%= label_tag 'User name' %>
-      <%= text_field :user, :email, disabled: true %>
+<div class="row">
+  <%= form_for @user do |f| %>
+      <div class="col-md-6  shifted">
+          <%= f.label 'User name', class: 'label label-default lbl-my-style' %>
+          <%= f.text_field :name, disabled: true, class: 'form-control' %>
+      </div>
+      <div class="col-md-6  shifted">
+          <%= f.label 'email', class: 'label label-default lbl-my-style' %>
+          <%= f.text_field :email, disabled: true, class: 'form-control' %>
+      </div>
+      <div class="col-md-12">
+          <%= f.label :group_id, 'Group name', class: 'label label-default lbl-my-style' %>
+          <%= f.select(:group_id, @list_of_groups, {}, class: "form-control")  %>
 
-      <%= label_tag 'Group name' %>
-      <%= select_tag :group_id, options_for_select(@list_of_groups, @user.group_id)  %>
-
-      <%= submit_tag 'Change group' %>
+          <%= f.submit 'Change group', class: "btn btn-success" %>
+      </div>
   <% end %>
 </div>

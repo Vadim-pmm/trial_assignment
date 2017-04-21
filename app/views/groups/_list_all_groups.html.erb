@@ -1,8 +1,11 @@
-<div>
+<div class="row">
   <% @groups.each do |item| %>
-      <%= item.name %>
-      <span>    </span>
-      <%= link_to 'Удалить', '#' %>
+      <div class="col-md-4">
+          <%= item.name %>
+      </div>
+      <div class="col-md-8 shifted">
+          <%= link_to 'Удалить', group_path(item.id), method: :delete, class: 'btn btn-xs btn-danger' %>
+      </div>
       <br />
   <% end %>
 </div>

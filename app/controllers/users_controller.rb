@@ -10,9 +10,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    a=11
-    user = User.find(params[:id])
-    if user.update(params_permitted)
+    user_ = User.find(params[:id])
+    if user_.update(params_permitted)
       flash[:notice] = 'Successfully updated'
     else
       flash[:danger] = "Can't save to db"
@@ -20,11 +19,8 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  def destroy
-  end
-
   def params_permitted
-    params.permit(:group_id)
+    params.require(:user).permit(:group_id)
   end
 
 end

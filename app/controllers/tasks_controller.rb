@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:welcome_page]
-  before_action :navigate_task, except: [:index, :index_archive, :new, :create]
+  before_action :navigate_task, except: [:welcome_page, :index, :index_archive, :new, :create]
 
   def welcome_page
   end
@@ -23,9 +23,8 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    @task = Task.new(:deadline => Date.today+7)
     @tasks = Task.where('accepted NOT LIKE (?)', true).order(updated_at: :desc)
-    @group_id = 1
     @list_of_groups = Group.all.map { |item| [item.name, item.id] }
   end
 
@@ -33,29 +32,23 @@ class TasksController < ApplicationController
     if params[:task][:name].strip == ''
       flash[:danger] = "Task name should not be empty"
     else
-        # не получается вызвать ppermitted отдельно для group_id,
-        # поэтому затолкнем пока ее в одну структуру вместе с name и description
-        params[:task][:group_id] = params[:group_id]
-
-        task_ = Task.new(params_permitted)
-        if task_.save
-          flash[:notice] = 'Successfully created'
-        else
-          flash[:danger] = "Can't save to db"
-        end
+      task_ = Task.new(params_permitted)
+      if task_.save
+        flash[:notice] = 'Successfully created'
+      else
+        flash[:danger] = "Can't save to db"
+      end
     end
     redirect_to new_task_path
   end
 
    def edit
+     @task.deadline ||= Date.today+7
      @list_of_groups = Group.where('name NOT LIKE (?)', 'undefined').map { |item| [item.name, item.id] }
-     # У НЕназначенной задачи group_id = 1 undefined
-     @group_id = 1
    end
 
   def update
-    params[:task][:group_id] = params[:group_id]
-
+    # params[:task][:group_id] = params[:group_id]
     if @task.update(params_permitted)
       flash[:notice] = 'Successfully assigned'
     else
